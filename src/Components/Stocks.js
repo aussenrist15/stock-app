@@ -1,12 +1,15 @@
 
 import React from 'react';
 
-const Stocks= (props)=> {
+const Stocks= ({str1, str2})=> {
 
     return(
-        <h2>
-            Stocks
-        </h2>
+        <div>
+            <h2>
+                Stocks
+            </h2>
+            
+        </div>
     );
 
 

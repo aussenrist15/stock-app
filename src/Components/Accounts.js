@@ -10,3 +10,4 @@ const Accounts = (props) => {
 
 
 }
+export default Accounts;
