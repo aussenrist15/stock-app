@@ -4,7 +4,7 @@ import React from 'react';
 const Stocks= ({str1, str2})=> {
 
     return(
-        <div>
+        <div className="container">
             <h2>
                 Stocks
             </h2>

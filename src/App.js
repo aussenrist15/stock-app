@@ -1,25 +1,22 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 
-import Stocks from './Components/Stocks'
-import Accounts from './Components/Accounts'
-import { Route, NavLink } from 'react-router-dom';
-
+import Stocks from "./Components/Stocks";
+import Accounts from "./Components/Accounts";
+import Navbar from "./Components/Navbar";
+import { Route } from "react-router-dom";
+import Home from "./Components/Home";
 
 function App() {
   return (
-    <div className="App">
-      <h1>
-        Hello World 
-      </h1>
-
-      <button><NavLink exact to='/account'> Accounts </NavLink></button>
-      <button><NavLink exact to='/stocks'> Stocks </NavLink></button>
-
-      <Route  path='/account' component={Accounts} />
-      <Route  path='/stocks' component= {Stocks} />
+    <div>
+      <Navbar className="navv" />
+      <div className=" con">
+        <Route exact path="/" component={Home}/>
+        <Route path="/account" component={Accounts} />
+        <Route path="/stocks" component={Stocks} />
+      </div>
       
-
     </div>
   );
 }
