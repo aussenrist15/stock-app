@@ -18,6 +18,11 @@ const Navbar = () => {
             Stocks
           </Link>
         </li>
+        <li class="nav-item">
+          <Link class="nav-link" exact to="/calculator">
+            Calculator
+          </Link>
+        </li>
       </ul>
     </nav>
   );

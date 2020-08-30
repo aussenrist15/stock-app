@@ -16,3 +16,19 @@
     background-position: center;
     background-repeat: no-repeat;
   }
+
+  .inpt {
+      width: 50%;
+  }
+
+  .bg {
+    background-image: url('https://source.unsplash.com/BtbjCFUvBXs/1920x1080');
+    background-size: cover;
+    height: 100vh;
+
+  }
+
+  .bts {
+      padding: 1.5em;
+      font-size: large;
+  }
