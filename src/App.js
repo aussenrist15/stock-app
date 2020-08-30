@@ -13,12 +13,13 @@ function App() {
     <div>
       <Navbar className="navv" />
       <div className=" con">
-   
+        <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/account" component={Accounts} />
           <Route path="/stocks" component={Stocks} />
           <Route path="/calculator" component={Calculator} />
-   </div>
+        </Switch>
+      </div>
     </div>
   );
 }
