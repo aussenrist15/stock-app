@@ -3,23 +3,23 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-      <Link class="navbar-brand" exact to="/">
+    <nav className="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+      <Link className="navbar-brand"  to="/">
         Shahtaj Gold
       </Link>
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <Link class="nav-link" exact to="/account">
+      <ul className="navbar-nav">
+        <li className="nav-item">
+          <Link class="nav-link"  to="/account">
             Accounts
           </Link>
         </li>
-        <li class="nav-item">
-          <Link class="nav-link" exact to="/stocks">
+        <li className="nav-item">
+          <Link className="nav-link"  to="/stocks">
             Stocks
           </Link>
         </li>
-        <li class="nav-item">
-          <Link class="nav-link" exact to="/calculator">
+        <li className="nav-item">
+          <Link className="nav-link"  to="/calculator">
             Calculator
           </Link>
         </li>

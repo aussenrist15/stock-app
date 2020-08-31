@@ -20,7 +20,7 @@ const Accounts = (props) => {
 
           <div className="col d-flex justify-content-center ">
             <Link
-              exact
+              
               to="/account/FactoryAccounts"
               type="button"
               className="btn btn-dark con bts"

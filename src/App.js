@@ -7,10 +7,13 @@ import Navbar from "./Components/Navbar";
 import { Route, Switch } from "react-router-dom";
 import Home from "./Components/Home";
 import Calculator from "./Components/Calculator";
+import CalculatorContextProvider from "./Context/CalculatorContext";
+
 
 function App() {
   return (
     <div>
+      <CalculatorContextProvider>
       <Navbar className="navv" />
       <div className=" con">
         <Switch>
@@ -20,6 +23,7 @@ function App() {
           <Route path="/calculator" component={Calculator} />
         </Switch>
       </div>
+      </CalculatorContextProvider>
     </div>
   );
 }
