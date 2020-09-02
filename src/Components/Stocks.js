@@ -1,9 +1,11 @@
 import React from "react";
 
-const Stocks = ({ str1, str2 }) => {
+const Stocks = () => {
   return (
-    <div className="container">
-      <h2>Stocks</h2>
+    <div className="tilebg margtop">
+      <div className="container">
+        <h2>Stocks</h2>
+      </div>
     </div>
   );
 };
