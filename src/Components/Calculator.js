@@ -36,6 +36,14 @@ const Calculator = () => {
     document.getElementById("alert-msg").innerHTML = ""; // reset message
   };
 
+  const handleEnterPress=(e)=> {
+    if(e.keyCode ===13) {
+      document.getElementById("addButton").click();
+
+    }
+  }
+
+
   const handleButtonPress = () => {
     if (document.getElementById("number").value === "") {
       alert("Please Enter A Number");
@@ -63,6 +71,7 @@ const Calculator = () => {
                 className="form-control inpt"
                 placeholder="Enter number"
                 id="number"
+                onKeyUp={handleEnterPress}
               />
               <div
                 className="alert alert-danger clearfix d-none margtop"
@@ -80,7 +89,7 @@ const Calculator = () => {
               </div>
             </div>
 
-            <button className="btn btn-primary" onClick={handleButtonPress}>
+            <button  className="btn btn-primary" onClick={handleButtonPress} id='addButton'>
               ADD
             </button>
 
