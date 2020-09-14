@@ -9,6 +9,8 @@ const Calculator = () => {
     addNumToList,
     removeNumFromList,
     clearAll,
+    addDatatoStock
+    
   } = useContext(CalculatorContext);
 
   const listValues = metersList.map((listItem) => {
@@ -57,7 +59,30 @@ const Calculator = () => {
 
   const clearStuff = () => {
     clearAll();
+    document.getElementById('date').value='';
+    document.getElementById('pageNumber').value='';
+    document.getElementById('incoming').checked = false;
+
   };
+
+  const addToStockClickHandle= () => {
+    if(sum===0){
+      return;
+    }
+    if(window.confirm('Are you sure you want to add this data to Stock')){
+      // TODO add data to Stock
+      const date = document.getElementById('date').value;
+      const pageNum = document.getElementById('pageNumber').value;
+      const type= document.getElementById('incoming').checked ? "Incoming" : "Outgoing" ;
+
+      //console.log(date, pageNum, type)
+
+      addDatatoStock(pageNum, type, date);
+      clearStuff();
+      alert('Successfully Added ! ')
+
+    }
+  }
 
   return (
     <div className="tilebg">
@@ -93,12 +118,47 @@ const Calculator = () => {
               ADD
             </button>
 
-            <div className="card margtopmore width50">
+
+
+
+            <div className="card margtop width50">
               <div className="card-header">SUM</div>
               <div className="card-body">
                 <h1>{sum}</h1>
               </div>
             </div>
+
+            <label className="margtopmore">Page Number:</label>
+            <input
+              type="number"
+              className="form-control inpt"
+              placeholder="Enter page number"
+              id="pageNumber"
+              
+            />
+
+            <div className="form-check-inline margtop">
+              <label className="form-check-label">
+                <input type="radio" className="form-check-input" name="optradio" id='incoming'/>Incoming
+              </label>
+            </div>
+            <div className="form-check-inline">
+              <label className="form-check-label">
+                <input type="radio" className="form-check-input" name="optradio" id='outgoing'/>Outgoing
+              </label>
+            </div>
+            <br/>
+
+            <label className="margtop">Date:</label> <br/>
+
+            <input type="date" id="date" className=''></input>
+            <br/>
+
+            <button  className="btn btn-primary margtop" onClick={addToStockClickHandle}  id='addListToStock'>
+            ADD TO STOCK !
+            </button>
+
+
           </div>
 
           <div className="col">
