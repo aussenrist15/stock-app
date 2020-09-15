@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { CalculatorContext } from "../Context/CalculatorContext";
+import { StockContext } from "../Context/StockContext";
 
 const Calculator = () => {
   const {
@@ -9,9 +10,9 @@ const Calculator = () => {
     addNumToList,
     removeNumFromList,
     clearAll,
-    addDatatoStock
-    
   } = useContext(CalculatorContext);
+
+  const { addDatatoStock } = useContext(StockContext);
 
   const listValues = metersList.map((listItem) => {
     return (
@@ -38,13 +39,11 @@ const Calculator = () => {
     document.getElementById("alert-msg").innerHTML = ""; // reset message
   };
 
-  const handleEnterPress=(e)=> {
-    if(e.keyCode ===13) {
+  const handleEnterPress = (e) => {
+    if (e.keyCode === 13) {
       document.getElementById("addButton").click();
-
     }
-  }
-
+  };
 
   const handleButtonPress = () => {
     if (document.getElementById("number").value === "") {
@@ -59,30 +58,38 @@ const Calculator = () => {
 
   const clearStuff = () => {
     clearAll();
-    document.getElementById('date').value='';
-    document.getElementById('pageNumber').value='';
-    document.getElementById('incoming').checked = false;
-
+    document.getElementById("date").value = "";
+    document.getElementById("pageNumber").value = "";
+    document.getElementById("incoming").checked = false;
   };
 
-  const addToStockClickHandle= () => {
-    if(sum===0){
+  const addToStockClickHandle = () => {
+    if (sum === 0) {
       return;
     }
-    if(window.confirm('Are you sure you want to add this data to Stock')){
+    if (window.confirm("Are you sure you want to add this data to Stock")) {
       // TODO add data to Stock
-      const date = document.getElementById('date').value;
-      const pageNum = document.getElementById('pageNumber').value;
-      const type= document.getElementById('incoming').checked ? "Incoming" : "Outgoing" ;
+      const personName = document.getElementById("personName").value;
+      const date = document.getElementById("date").value;
+      const pageNum = document.getElementById("pageNumber").value;
+      const type = document.getElementById("incoming").checked
+        ? "Incoming"
+        : "Outgoing";
 
       //console.log(date, pageNum, type)
 
-      addDatatoStock(pageNum, type, date);
-      clearStuff();
-      alert('Successfully Added ! ')
+      let pName = "";
+      if (personName === "") {
+        pName = "--";
+      } else {
+        pName = personName;
+      }
 
+      addDatatoStock(metersList, sum, pageNum, type, date, pName);
+      clearStuff();
+      alert("Successfully Added ! ");
     }
-  }
+  };
 
   return (
     <div className="tilebg">
@@ -113,52 +120,73 @@ const Calculator = () => {
                 </button>
               </div>
             </div>
-
-            <button  className="btn btn-primary" onClick={handleButtonPress} id='addButton'>
+            <button
+              className="btn btn-primary"
+              onClick={handleButtonPress}
+              id="addButton"
+            >
               ADD
             </button>
-
-
-
-
             <div className="card margtop width50">
               <div className="card-header">SUM</div>
               <div className="card-body">
                 <h1>{sum}</h1>
               </div>
             </div>
+            <div className="row">
+              <div className="col">
+                <label className="margtopmore">Page Number:</label>
+                <input
+                  type="number"
+                  className="form-control inpt"
+                  placeholder="Enter page number"
+                  id="pageNumber"
+                />
+              </div>
 
-            <label className="margtopmore">Page Number:</label>
-            <input
-              type="number"
-              className="form-control inpt"
-              placeholder="Enter page number"
-              id="pageNumber"
-              
-            />
-
+              <div className="col">
+                <label className="margtopmore">Name:</label>
+                <input
+                  type="text"
+                  className="form-control w-60"
+                  placeholder="Enter name"
+                  id="personName"
+                />
+              </div>
+            </div>
             <div className="form-check-inline margtop">
               <label className="form-check-label">
-                <input type="radio" className="form-check-input" name="optradio" id='incoming'/>Incoming
+                <input
+                  type="radio"
+                  className="form-check-input"
+                  name="optradio"
+                  id="incoming"
+                />
+                Incoming
               </label>
             </div>
             <div className="form-check-inline">
               <label className="form-check-label">
-                <input type="radio" className="form-check-input" name="optradio" id='outgoing'/>Outgoing
+                <input
+                  type="radio"
+                  className="form-check-input"
+                  name="optradio"
+                  id="outgoing"
+                />
+                Outgoing
               </label>
             </div>
-            <br/>
-
-            <label className="margtop">Date:</label> <br/>
-
-            <input type="date" id="date" className=''></input>
-            <br/>
-
-            <button  className="btn btn-primary margtop" onClick={addToStockClickHandle}  id='addListToStock'>
-            ADD TO STOCK !
+            <br />
+            <label className="margtop">Date:</label> <br />
+            <input type="date" id="date" className=""></input>
+            <br />
+            <button
+              className="btn btn-primary margtop"
+              onClick={addToStockClickHandle}
+              id="addListToStock"
+            >
+              ADD TO STOCK !
             </button>
-
-
           </div>
 
           <div className="col">

@@ -5,8 +5,6 @@ export const CalculatorContext = createContext();
 
 const CalculatorContextProvider = (props) => {
   const [sum, setSum] = useState(0);
-  const [StockData , setStockData] = useState([]);
-
 
   const addSum = (num) => {
     setSum(parseFloat(sum) + parseFloat(num));
@@ -22,28 +20,7 @@ const CalculatorContextProvider = (props) => {
     setMeterList([...metersList, { num, id: uuid() }]);
   };
 
-
-//  const [savedData, setSavedData] = useState([]);
-
-  const addDatatoStock= (pageNum, type, date) => {
-
-    const obj = {
-      id: uuid(),
-      pageNum:pageNum,
-      type:type,
-      list: metersList,
-      date: date,
-      sum: sum
-    }
-
-    setStockData(
-      [...StockData , obj]
-    );
-   
-
-  }
-
-
+  //  const [savedData, setSavedData] = useState([]);
 
   const removeNumFromList = (num) => {
     setMeterList(metersList.filter((meterList) => meterList.id !== num.id));
@@ -64,8 +41,6 @@ const CalculatorContextProvider = (props) => {
         addNumToList,
         removeNumFromList,
         clearAll,
-        addDatatoStock,
-        StockData
       }}
     >
       {props.children}

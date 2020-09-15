@@ -8,22 +8,24 @@ import { Route, Switch } from "react-router-dom";
 import Home from "./Components/Home";
 import Calculator from "./Components/Calculator";
 import CalculatorContextProvider from "./Context/CalculatorContext";
-
+import StockContextProvider from "./Context/StockContext";
 
 function App() {
   return (
     <div>
-      <CalculatorContextProvider>
-      <Navbar className="navv" />
-      <div className=" con">
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/account" component={Accounts} />
-          <Route path="/stocks" component={Stocks} />
-          <Route path="/calculator" component={Calculator} />
-        </Switch>
-      </div>
-      </CalculatorContextProvider>
+      <StockContextProvider>
+        <CalculatorContextProvider>
+          <Navbar className="navv" />
+          <div className=" con">
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/account" component={Accounts} />
+              <Route path="/stocks" component={Stocks} />
+              <Route path="/calculator" component={Calculator} />
+            </Switch>
+          </div>
+        </CalculatorContextProvider>
+      </StockContextProvider>
     </div>
   );
 }
