@@ -5,8 +5,11 @@ export const StockContext = createContext();
 
 const StockContextProvider = (props) => {
   const [StockData, setStockData] = useState([]);
+  const [StockB, setStockB] = useState([]);
+  const [totalStockA, setTotalStockA] = useState(0);
+  const [totalStockB, setTotalStockB] = useState(0);
 
-  const addDatatoStock = (metersList, sum, pageNum, type, date, pName) => {
+  const addDatatoStockB = (metersList, sum, pageNum, type, date, pName) => {
     const obj = {
       id: uuid(),
       pageNum: pageNum,
@@ -15,6 +18,28 @@ const StockContextProvider = (props) => {
       date: date,
       sum: sum,
       pName: pName,
+    };
+    setStockB([...StockData, obj]);
+  };
+
+  const addDatatoStock = (
+    metersList,
+    sum,
+    pageNum,
+    type,
+    date,
+    pName,
+    stockAfterUpdate
+  ) => {
+    const obj = {
+      id: uuid(),
+      pageNum: pageNum,
+      type: type,
+      list: metersList,
+      date: date,
+      sum: sum,
+      pName: pName,
+      stockAfterUpdate: stockAfterUpdate,
     };
 
     setStockData([...StockData, obj]);
@@ -25,6 +50,10 @@ const StockContextProvider = (props) => {
       value={{
         StockData,
         addDatatoStock,
+        totalStockA,
+        totalStockB,
+        setTotalStockA,
+        setTotalStockB,
       }}
     >
       {props.children}

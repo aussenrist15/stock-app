@@ -12,7 +12,9 @@ const Calculator = () => {
     clearAll,
   } = useContext(CalculatorContext);
 
-  const { addDatatoStock } = useContext(StockContext);
+  const { addDatatoStock, totalStockA, setTotalStockA } = useContext(
+    StockContext
+  );
 
   const listValues = metersList.map((listItem) => {
     return (
@@ -85,7 +87,16 @@ const Calculator = () => {
         pName = personName;
       }
 
-      addDatatoStock(metersList, sum, pageNum, type, date, pName);
+      let stock = totalStockA;
+      if (type === "Incoming") {
+        stock = stock + sum;
+        setTotalStockA(stock);
+      } else {
+        stock = stock - sum;
+        setTotalStockA(stock);
+      }
+      // Stock A
+      addDatatoStock(metersList, sum, pageNum, type, date, pName, stock);
       clearStuff();
       alert("Successfully Added ! ");
     }

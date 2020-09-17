@@ -9,6 +9,7 @@ import Home from "./Components/Home";
 import Calculator from "./Components/Calculator";
 import CalculatorContextProvider from "./Context/CalculatorContext";
 import StockContextProvider from "./Context/StockContext";
+import { TotalStock } from "./Components/TotalStock";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route path="/account" component={Accounts} />
               <Route path="/stocks" component={Stocks} />
               <Route path="/calculator" component={Calculator} />
+              <Route path="/total-stock" component={TotalStock} />
             </Switch>
           </div>
         </CalculatorContextProvider>
