@@ -47,9 +47,8 @@ export const StockA = () => {
           <th>*</th>
           <th>Type</th>
         </tr>
-        {retval}
       </thead>
-      <tbody></tbody>
+      <tbody>{retval}</tbody>
     </table>
   );
 };

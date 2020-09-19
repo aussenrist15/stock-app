@@ -10,24 +10,35 @@ import Calculator from "./Components/Calculator";
 import CalculatorContextProvider from "./Context/CalculatorContext";
 import StockContextProvider from "./Context/StockContext";
 import { TotalStock } from "./Components/TotalStock";
+import {
+  CustomerContext,
+  CustomerContextProvider,
+} from "./Context/CustomerContext";
+import { Customer } from "./Components/Customer";
 
 function App() {
   return (
     <div>
-      <StockContextProvider>
-        <CalculatorContextProvider>
-          <Navbar className="navv" />
-          <div className=" con">
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/account" component={Accounts} />
-              <Route path="/stocks" component={Stocks} />
-              <Route path="/calculator" component={Calculator} />
-              <Route path="/total-stock" component={TotalStock} />
-            </Switch>
-          </div>
-        </CalculatorContextProvider>
-      </StockContextProvider>
+      <CustomerContextProvider>
+        <StockContextProvider>
+          <CalculatorContextProvider>
+            <Navbar className="navv" />
+            <div className=" con">
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route path="/account" component={Accounts} />
+                <Route path="/stocks" component={Stocks} />
+                <Route path="/calculator" component={Calculator} />
+                <Route path="/total-stock" component={TotalStock} />
+                <Route
+                  path="/Accounts/SingleCustomer/:id"
+                  component={Customer}
+                ></Route>
+              </Switch>
+            </div>
+          </CalculatorContextProvider>
+        </StockContextProvider>
+      </CustomerContextProvider>
     </div>
   );
 }
