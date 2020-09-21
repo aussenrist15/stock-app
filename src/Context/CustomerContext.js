@@ -7,28 +7,48 @@ export const CustomerContextProvider = (props) => {
   const obj1 = {
     id: 1,
     date: "25-9-2020",
-    credit: 100,
-    debit: 400,
     totalBal: 1000,
     name: "Ayesha",
   };
   const obj2 = {
     id: 2,
     date: "26-9-2020",
-    credit: 1000,
-    debit: 400,
     totalBal: 1000,
     name: "Basit",
   };
   const [customers, setCustomers] = useState([obj1, obj2]);
-  const [customer, setCustomer] = useState(obj1);
+  const [customer, setCustomer] = useState(null);
+  const [tempCustomerforEditing, setTemp] = useState(null);
 
-  const addCustomer = (date, credit, debit, totalBal, name) => {
+  const [transactions, setTransactions] = useState([]);
+
+  const addTransacation = (customerID, date, totalBill, paid) => {
+    setTransactions([
+      ...transactions,
+      {
+        customerID,
+        date,
+        totalBill,
+        paid,
+      },
+    ]);
+
+    customers.forEach((item) => {
+      if (item.id == customerID) setTemp(item);
+    });
+
+    setCustomers(
+      customers.filter((item) => {
+        return item.id === customerID;
+      })
+    );
+    const diff = totalBill - paid;
+    tempCustomerforEditing.totalBal = tempCustomerforEditing.totalBal + diff;
+  };
+
+  const addCustomer = (totalBal, name) => {
     const obj = {
       id: uuid(),
-      date,
-      credit,
-      debit,
       totalBal,
       name,
     };

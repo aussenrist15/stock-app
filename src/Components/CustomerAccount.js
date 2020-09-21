@@ -23,6 +23,14 @@ const CustomerAccount = () => {
                   View Details
                 </Link>
               </td>
+              <td>
+                <Link
+                  to={`/Accounts/Transactions/${item.id}`}
+                  className="btn btn-dark"
+                >
+                  Add Transaction
+                </Link>
+              </td>
             </tr>
           ) : (
             <tr className="table-info">
@@ -34,6 +42,14 @@ const CustomerAccount = () => {
                   className="btn btn-dark"
                 >
                   View Details
+                </Link>
+              </td>
+              <td>
+                <Link
+                  to={`/Accounts/Transactions/${item.id}`}
+                  className="btn btn-dark"
+                >
+                  Add Transaction
                 </Link>
               </td>
             </tr>
@@ -49,6 +65,7 @@ const CustomerAccount = () => {
           <tr>
             <th>Customer Name</th>
             <th>Total Balance</th>
+            <th>*</th>
             <th>*</th>
           </tr>
         </thead>
