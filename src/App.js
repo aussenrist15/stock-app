@@ -16,6 +16,7 @@ import {
 } from "./Context/CustomerContext";
 import { Customer } from "./Components/Customer";
 import { Transaction } from "./Components/Transaction";
+import { AddNewCustomer } from "./Components/AddNewCustomer";
 
 function App() {
   return (
@@ -38,6 +39,10 @@ function App() {
                 <Route
                   path="/Accounts/Transactions/:id"
                   component={Transaction}
+                ></Route>
+                <Route
+                  path="/Accounts/AddNew"
+                  component={AddNewCustomer}
                 ></Route>
               </Switch>
             </div>

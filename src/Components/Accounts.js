@@ -6,7 +6,7 @@ import FactoryAccount from "./FactoryAccount";
 const Accounts = (props) => {
   return (
     <div className="bg">
-      <div className="container">
+      <div className="container ">
         <div className="row">
           <div className="col d-flex justify-content-center">
             <Link

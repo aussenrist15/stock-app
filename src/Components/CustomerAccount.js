@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { Link, Route } from "react-router-dom";
 import { CustomerContext } from "../Context/CustomerContext";
+import { AddNewCustomer } from "./AddNewCustomer";
 
 const CustomerAccount = () => {
   const { customers, addCustomer } = useContext(CustomerContext);
@@ -60,6 +61,9 @@ const CustomerAccount = () => {
 
   return (
     <div className="container con">
+      <Link type="button" className="btn btn-dark mb-3" to="/Accounts/AddNew">
+        Add New Customer{" "}
+      </Link>
       <table className="table table-hover ">
         <thead className="thead-dark">
           <tr>

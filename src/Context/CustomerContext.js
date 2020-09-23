@@ -4,23 +4,14 @@ import { v4 as uuid } from "uuid";
 export const CustomerContext = createContext();
 
 export const CustomerContextProvider = (props) => {
-  const obj1 = {
-    id: 1,
-    date: "25-9-2020",
-    totalBal: 1000,
-    name: "Ayesha",
-  };
-  const obj2 = {
-    id: 2,
-    date: "26-9-2020",
-    totalBal: 1000,
-    name: "Basit",
-  };
-  const [customers, setCustomers] = useState([obj1, obj2]);
+  const [customers, setCustomers] = useState([]);
+
   const [customer, setCustomer] = useState(null);
+
   const [tempCustomerforEditing, setTemp] = useState(null);
 
   const [transactions, setTransactions] = useState([]);
+  const [customerTransaction, setCustomerTransaction] = useState([]);
 
   const addTransacation = (customerID, date, totalBill, paid) => {
     setTransactions([
@@ -33,17 +24,21 @@ export const CustomerContextProvider = (props) => {
       },
     ]);
 
-    customers.forEach((item) => {
-      if (item.id == customerID) setTemp(item);
+    var objTest;
+
+    const abc = customers.forEach((item) => {
+      if (item.id == customerID) objTest = item;
     });
 
-    setCustomers(
-      customers.filter((item) => {
-        return item.id === customerID;
-      })
-    );
-    const diff = totalBill - paid;
-    tempCustomerforEditing.totalBal = tempCustomerforEditing.totalBal + diff;
+    console.log(objTest);
+
+    const difference = totalBill - paid;
+    objTest.totalBal = objTest.totalBal + difference;
+
+    DeleteCustomer(objTest.id);
+    setCustomers((item) => {
+      return [...item, objTest];
+    });
   };
 
   const addCustomer = (totalBal, name) => {
@@ -53,18 +48,39 @@ export const CustomerContextProvider = (props) => {
       name,
     };
     setCustomers([...customers, obj]);
-    customers.sort((a, b) => a.name.localeCompare(b.name));
+    //customers.sort((a, b) => a.name.localeCompare(b.name));
   };
 
+  const DeleteCustomer = (id) => {
+    setCustomers(customers.filter((item) => item.id !== id));
+  };
   const selectCustomer = (id) => {
     const obj = customers.forEach((item) => {
-      if (item.id == id) setCustomer(item);
+      if (id == item.id) setCustomer(item);
+    });
+    setCustomerTransaction((item) => {
+      return [];
+    });
+    const custTra = transactions.forEach((item) => {
+      if (id === item.customerID)
+        setCustomerTransaction((current) => {
+          return [...current, item];
+        });
     });
   };
 
   return (
     <CustomerContext.Provider
-      value={{ customer, customers, addCustomer, selectCustomer }}
+      value={{
+        customer,
+        customers,
+        addCustomer,
+        selectCustomer,
+        addTransacation,
+        setCustomerTransaction,
+        transactions,
+        customerTransaction,
+      }}
     >
       {props.children}
     </CustomerContext.Provider>
