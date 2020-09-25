@@ -56,7 +56,10 @@ export const CustomerContextProvider = (props) => {
   };
   const selectCustomer = (id) => {
     const obj = customers.forEach((item) => {
-      if (id == item.id) setCustomer(item);
+      if (id == item.id)
+        setCustomer((objj) => {
+          return item;
+        });
     });
     setCustomerTransaction((item) => {
       return [];

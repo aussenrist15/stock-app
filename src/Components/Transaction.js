@@ -1,18 +1,38 @@
 import React, { useContext, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { CustomerContext } from "../Context/CustomerContext";
+import { FactoryContext } from "../Context/FactoryContext";
 
-export const Transaction = () => {
+export const Transaction = (props) => {
   const { id } = useParams();
   const { customer, selectCustomer, addTransacation } = useContext(
     CustomerContext
   );
 
+  const { factory, selectFactory, addFactoryTransacation } = useContext(
+    FactoryContext
+  );
+
+  var string;
+
   useEffect(() => {
-    selectCustomer(id);
+    if (props.location.state.prevPath === "/account/CustomerAccounts") {
+      selectCustomer(id);
+    } else if (props.location.state.prevPath === "/account/FactoryAccounts") {
+      selectFactory(id);
+    } else {
+      history.push("/");
+    }
   }, []);
 
   const history = useHistory();
+
+  console.log(props.location.state.prevPath);
+
+  string =
+    props.location.state.prevPath === "/account/CustomerAccounts"
+      ? `Add Customer Transaction  `
+      : `Add Factory Transaction For ${factory.name} `;
 
   const clickHandle = () => {
     const totalBill = document.getElementById("bill").value;
@@ -24,8 +44,14 @@ export const Transaction = () => {
     }
 
     if (window.confirm("Are you sure want to add this transaction?")) {
-      addTransacation(id, date, totalBill, paid);
-      history.push("/account/CustomerAccounts");
+      if (props.location.state.prevPath === "/account/CustomerAccounts") {
+        addTransacation(id, date, totalBill, paid);
+        history.push("/account/CustomerAccounts");
+      }
+      if (props.location.state.prevPath === "/account/FactoryAccounts") {
+        addFactoryTransacation(id, date, totalBill, paid);
+        history.push("/account/FactoryAccounts");
+      }
     }
   };
 
@@ -33,6 +59,7 @@ export const Transaction = () => {
     <div className="row margtop">
       <div className="col-4"></div>
       <div className="col-4">
+        <h1 className="text-center">{string}</h1>
         <div className="form-group margtopmore">
           <label htmlFor="bill">Total Bill:</label>
           <input

@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Link, Route } from "react-router-dom";
 import { CustomerContext } from "../Context/CustomerContext";
-import { AddNewCustomer } from "./AddNewCustomer";
 
 const CustomerAccount = () => {
   const { customers, addCustomer } = useContext(CustomerContext);
@@ -47,7 +46,10 @@ const CustomerAccount = () => {
               </td>
               <td>
                 <Link
-                  to={`/Accounts/Transactions/${item.id}`}
+                  to={{
+                    pathname: `/Accounts/Transactions/${item.id}`,
+                    state: { prevPath: window.location.pathname },
+                  }}
                   className="btn btn-dark"
                 >
                   Add Transaction
