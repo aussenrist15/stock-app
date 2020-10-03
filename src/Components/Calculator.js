@@ -12,9 +12,14 @@ const Calculator = () => {
     clearAll,
   } = useContext(CalculatorContext);
 
-  const { addDatatoStock, totalStockA, setTotalStockA } = useContext(
-    StockContext
-  );
+  const {
+    addDatatoStock,
+    totalStockA,
+    setTotalStockA,
+    totalStockB,
+    setTotalStockB,
+    addDatatoStockB,
+  } = useContext(StockContext);
 
   const listValues = metersList.map((listItem) => {
     return (
@@ -97,6 +102,43 @@ const Calculator = () => {
       }
       // Stock A
       addDatatoStock(metersList, sum, pageNum, type, date, pName, stock);
+      clearStuff();
+      alert("Successfully Added ! ");
+    }
+  };
+
+  const addToStockBClickHandle = () => {
+    if (sum === 0) {
+      return;
+    }
+    if (window.confirm("Are you sure you want to add this data to Stock")) {
+      // TODO add data to Stock
+      const personName = document.getElementById("personName").value;
+      const date = document.getElementById("date").value;
+      const pageNum = document.getElementById("pageNumber").value;
+      const type = document.getElementById("incoming").checked
+        ? "Incoming"
+        : "Outgoing";
+
+      //console.log(date, pageNum, type)
+
+      let pName = "";
+      if (personName === "") {
+        pName = "--";
+      } else {
+        pName = personName;
+      }
+
+      let stock = totalStockB;
+      if (type === "Incoming") {
+        stock = stock + sum;
+        setTotalStockB(stock);
+      } else {
+        stock = stock - sum;
+        setTotalStockB(stock);
+      }
+      // Stock A
+      addDatatoStockB(metersList, sum, pageNum, type, date, pName, stock);
       clearStuff();
       alert("Successfully Added ! ");
     }
@@ -196,7 +238,14 @@ const Calculator = () => {
               onClick={addToStockClickHandle}
               id="addListToStock"
             >
-              ADD TO STOCK !
+              ADD TO STOCK A !
+            </button>
+            <button
+              className="btn btn-primary margtop ml-4"
+              onClick={addToStockBClickHandle}
+              id="addListToStock"
+            >
+              ADD TO STOCK B !
             </button>
           </div>
 

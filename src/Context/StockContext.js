@@ -9,7 +9,15 @@ const StockContextProvider = (props) => {
   const [totalStockA, setTotalStockA] = useState(0);
   const [totalStockB, setTotalStockB] = useState(0);
 
-  const addDatatoStockB = (metersList, sum, pageNum, type, date, pName) => {
+  const addDatatoStockB = (
+    metersList,
+    sum,
+    pageNum,
+    type,
+    date,
+    pName,
+    stockBafterUpdate
+  ) => {
     const obj = {
       id: uuid(),
       pageNum: pageNum,
@@ -18,8 +26,9 @@ const StockContextProvider = (props) => {
       date: date,
       sum: sum,
       pName: pName,
+      stockBafterUpdate: stockBafterUpdate,
     };
-    setStockB([...StockData, obj]);
+    setStockB([...StockB, obj]);
   };
 
   const addDatatoStock = (
@@ -49,7 +58,9 @@ const StockContextProvider = (props) => {
     <StockContext.Provider
       value={{
         StockData,
+        StockB,
         addDatatoStock,
+        addDatatoStockB,
         totalStockA,
         totalStockB,
         setTotalStockA,
